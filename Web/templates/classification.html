@@ -1,0 +1,70 @@
+<!-- templates/classification.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-classification">
+    <h1 class="header-classification">Klasifikasi</h1>
+    <div class="row">
+        <!-- Pilihan Model -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Pilih Model</h5>
+                </div>
+                <div class="card-body">
+                    <div class="model-selection">
+                        <button type="button" class="model-btn" data-model="ann">Artificial Neural Network</button>
+                        <button type="button" class="model-btn" data-model="adaboost_dt">AdaBoost Decision Tree</button>
+                        <button type="button" class="model-btn" data-model="adaboost_svm_rbf">AdaBoost SVM RBF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Masukan Data dan Hasil -->
+        <div class="col-md-8">
+            <!-- Masukan Data -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Masukan Data</h5>
+                </div>
+                <div class="card-body">
+                        <!-- Button Input RGB -->
+                        <button type="button" class="btn btn-secondary me-2" id="toggle-input">Input R G B</button>
+                        <!-- Kolom RGB -->
+                        <div class="d-flex align-items-center" id="rgb-input" style="display: none; gap: 5px;">
+                            <input type="number" id="r" name="r" placeholder="R" class="form-control" style="width: 70px;">
+                            <input type="number" id="g" name="g" placeholder="G" class="form-control" style="width: 70px;">
+                            <input type="number" id="b" name="b" placeholder="B" class="form-control" style="width: 70px;">
+                        </div>
+                        <!-- Button Upload Data -->
+                        <label class="btn btn-secondary me-2" id="upload-btn">
+                            Upload Data <input type="file" name="file" id="file-upload">
+                        </label>
+                </div>
+            </div>
+
+            <!-- Hasil Klasifikasi -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>Hasil Klasifikasi</h5>
+                </div>
+                <div class="card-body">
+                    <div class="results-box mb-3">
+                        {% if classification_results %}
+                            <ul>
+                                {% for result in classification_results %}
+                                    <li>{{ result }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>Tidak ada hasil klasifikasi.</p>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100" id="run-model">Jalankan Model</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

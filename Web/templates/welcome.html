@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="logo-section">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LactucaClassifier Logo">
+    </div>
+    <div class="text-section">
+        <h1>Welcome to</h1>
+        <h1><strong>LactucaClassifier</strong></h1>
+        <p class="angled-text">Start Classifying <br> <span class="highlight">Now!</span></p>
+        <button onclick="window.location.href='{{ url_for('classification') }}'">Get Started</button>
+    </div>
+</div>
+{% endblock %}

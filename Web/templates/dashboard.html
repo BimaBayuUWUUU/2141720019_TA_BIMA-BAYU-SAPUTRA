@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="model-container">
+    <!-- Container Pilihan Model -->
+    <div class="model-options">
+        <h1 class="header-model">Pelajari Model</h1>
+        <ul class="model-list">
+            <li><a href="#" class="model-choice">Artificial Neural Network</a></li>
+            <li><a href="#" class="model-choice">AdaBoost Decision Tree</a></li>
+            <li><a href="#" class="model-choice">AdaBoost SVM RBF</a></li>
+        </ul>
+    </div>
+
+    <!-- Container Slideshow -->
+    <div class="slideshow-container">
+        <h1 class="header-slide">Tentang Model</h1>
+        <div class="image-box">
+            <img src="placeholder.png" alt="Performance Image" />
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-left">&lt;</button>
+            <button class="nav-right">&gt;</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

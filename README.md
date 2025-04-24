@@ -14,10 +14,10 @@ Penelitian ini bertujuan untuk membandingkan kinerja beberapa model machine lear
 - **Distribusi Data**: Kelas relatif seimbang.
 
 ### Model Machine Learning
-- Random Forest (RF).
-- XGBoost.
 - Artificial Neural Network (ANN).
-- Adaptive Neuro-Fuzzy Inference System (ANFIS).
+- Adaptive Boosting with Decision Tree.
+- Adaptive Boosting with SVM.
+- Bagging Boosting with SVM.
 
 ### Tahapan Penelitian
 1. **Preprocessing**:
@@ -34,16 +34,15 @@ Penelitian ini bertujuan untuk membandingkan kinerja beberapa model machine lear
 Menentukan model terbaik dalam mengklasifikasikan warna daun selada berdasarkan data RGB untuk mengevaluasi pengaruh pemberian pupuk Silika Quantum Dots.
 
 ## Struktur File
-- `data/`: Dataset penelitian.
-- `src/`: Implementasi kode untuk preprocessing, training, dan evaluasi model.
-- `notebooks/`: Eksplorasi awal dan analisis dataset.
-- `results/`: Hasil klasifikasi dan evaluasi model.
+- `Data Arduino 4 Treatment/`: Dataset penelitian.
+- `Ipynb/`: Implementasi kode untuk preprocessing, training, dan evaluasi model.
+- `Web/`: Implementasi Antarmuka untuk Model.
 - `README.md`: Dokumentasi singkat proyek (file ini).
 
 ## Cara Penggunaan
 1. Pastikan semua dependensi telah terpasang (Python, library machine learning, dsb).
 2. Jalankan preprocessing untuk mengubah data mentah menjadi format siap pakai.
-3. Lakukan pelatihan model dengan menjalankan skrip di folder `src/`.
+3. Lakukan pelatihan model dengan menjalankan skrip di folder `Ipynb/`.
 4. Evaluasi hasil klasifikasi dan analisis performa model.
 
 ## Teknologi yang Digunakan
@@ -52,7 +51,7 @@ Menentukan model terbaik dalam mengklasifikasikan warna daun selada berdasarkan 
 - **Library**: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, XGBoost, TensorFlow/PyTorch.
 
 ## Penulis
-Penelitian ini dilakukan oleh [Nama Anda], mahasiswa semester akhir Program Studi Informatika, sebagai bagian dari penyelesaian tugas akhir.
+Penelitian ini dilakukan oleh **BIMA BAYU SAPUTRA** [2141720019], mahasiswa semester akhir Program Studi Informatika, sebagai bagian dari penyelesaian tugas akhir.
 
 ## Lisensi
 Proyek ini dibuat untuk keperluan akademik dan penelitian. Data dan kode dapat digunakan dengan izin dari penulis.

@@ -1,0 +1,49 @@
+2025-05-04 20:57:11,280 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-04 20:57:11,280 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 20:57:11,302 - INFO -  * Restarting with watchdog (windowsapi)
+2025-05-04 20:57:13,073 - WARNING -  * Debugger is active!
+2025-05-04 20:57:13,132 - INFO -  * Debugger PIN: 642-162-344
+2025-05-04 20:58:05,273 - INFO - 127.0.0.1 - - [04/May/2025 20:58:05] "GET /?spm=a2ty_o01.29997173.0.0.10eb2d0clLyAli HTTP/1.1" 200 -
+2025-05-04 20:58:05,801 - INFO - 127.0.0.1 - - [04/May/2025 20:58:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:58:05,801 - INFO - 127.0.0.1 - - [04/May/2025 20:58:05] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:58:05,809 - INFO - 127.0.0.1 - - [04/May/2025 20:58:05] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:58:05,838 - INFO - 127.0.0.1 - - [04/May/2025 20:58:05] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-04 20:58:07,583 - INFO - 127.0.0.1 - - [04/May/2025 20:58:07] "GET /dashboard HTTP/1.1" 200 -
+2025-05-04 20:58:07,607 - INFO - 127.0.0.1 - - [04/May/2025 20:58:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:58:07,614 - INFO - 127.0.0.1 - - [04/May/2025 20:58:07] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:58:07,615 - INFO - 127.0.0.1 - - [04/May/2025 20:58:07] "[33mGET /placeholder.png HTTP/1.1[0m" 404 -
+2025-05-04 20:58:07,616 - INFO - 127.0.0.1 - - [04/May/2025 20:58:07] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:58:08,259 - INFO - 127.0.0.1 - - [04/May/2025 20:58:08] "GET /classification HTTP/1.1" 200 -
+2025-05-04 20:58:08,288 - INFO - 127.0.0.1 - - [04/May/2025 20:58:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:58:08,290 - INFO - 127.0.0.1 - - [04/May/2025 20:58:08] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:58:08,293 - INFO - 127.0.0.1 - - [04/May/2025 20:58:08] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:58:24,685 - INFO - Form submitted with R=0, G=0, B=0, Models=['ann']
+2025-05-04 20:58:24,717 - INFO - 127.0.0.1 - - [04/May/2025 20:58:24] "POST /classification HTTP/1.1" 200 -
+2025-05-04 20:58:24,740 - INFO - 127.0.0.1 - - [04/May/2025 20:58:24] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:58:24,742 - INFO - 127.0.0.1 - - [04/May/2025 20:58:24] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:58:24,743 - INFO - 127.0.0.1 - - [04/May/2025 20:58:24] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:58:54,580 - INFO - Form submitted with R=115, G=151, B=135, Models=['ann']
+2025-05-04 20:58:54,587 - INFO - 127.0.0.1 - - [04/May/2025 20:58:54] "POST /classification HTTP/1.1" 200 -
+2025-05-04 20:58:54,612 - INFO - 127.0.0.1 - - [04/May/2025 20:58:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:58:54,614 - INFO - 127.0.0.1 - - [04/May/2025 20:58:54] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:58:54,615 - INFO - 127.0.0.1 - - [04/May/2025 20:58:54] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:59:06,830 - INFO - Form submitted with R=151, G=135, B=145, Models=['ann']
+2025-05-04 20:59:06,836 - INFO - 127.0.0.1 - - [04/May/2025 20:59:06] "POST /classification HTTP/1.1" 200 -
+2025-05-04 20:59:06,857 - INFO - 127.0.0.1 - - [04/May/2025 20:59:06] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:59:06,859 - INFO - 127.0.0.1 - - [04/May/2025 20:59:06] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:59:06,860 - INFO - 127.0.0.1 - - [04/May/2025 20:59:06] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:59:10,744 - INFO - 127.0.0.1 - - [04/May/2025 20:59:10] "GET /dashboard HTTP/1.1" 200 -
+2025-05-04 20:59:10,768 - INFO - 127.0.0.1 - - [04/May/2025 20:59:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:59:10,770 - INFO - 127.0.0.1 - - [04/May/2025 20:59:10] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:59:10,771 - INFO - 127.0.0.1 - - [04/May/2025 20:59:10] "[33mGET /placeholder.png HTTP/1.1[0m" 404 -
+2025-05-04 20:59:10,772 - INFO - 127.0.0.1 - - [04/May/2025 20:59:10] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:59:11,184 - INFO - 127.0.0.1 - - [04/May/2025 20:59:11] "GET /classification HTTP/1.1" 200 -
+2025-05-04 20:59:11,214 - INFO - 127.0.0.1 - - [04/May/2025 20:59:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:59:11,215 - INFO - 127.0.0.1 - - [04/May/2025 20:59:11] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:59:11,217 - INFO - 127.0.0.1 - - [04/May/2025 20:59:11] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -
+2025-05-04 20:59:22,711 - INFO - Form submitted with R=135, G=145, B=150, Models=['ann']
+2025-05-04 20:59:22,718 - INFO - 127.0.0.1 - - [04/May/2025 20:59:22] "POST /classification HTTP/1.1" 200 -
+2025-05-04 20:59:22,741 - INFO - 127.0.0.1 - - [04/May/2025 20:59:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-05-04 20:59:22,742 - INFO - 127.0.0.1 - - [04/May/2025 20:59:22] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-05-04 20:59:22,744 - INFO - 127.0.0.1 - - [04/May/2025 20:59:22] "[36mGET /static/images/logo.png HTTP/1.1[0m" 304 -

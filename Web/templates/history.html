@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="header-classification">Riwayat Klasifikasi</h1>
+
+<!-- Tabel Riwayat Input -->
+<div class="card">
+    <div class="card-header">Data Input</div>
+    <div class="card-body">
+        {% if inputs %}
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th> <!-- Kolom tambahan untuk nomor baris -->
+                    <th>ID</th>
+                    <th>R</th>
+                    <th>G</th>
+                    <th>B</th>
+                    <th>Waktu Input</th>
+                    <th>File Digunakan</th>
+                    <th>Model Digunakan</th>
+                    <th>Kelas Prediksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for input, result in inputs %}
+                <tr>
+                    <td>{{ loop.index + (input_pagination.page - 1) * input_pagination.per_page }}</td>
+                    <td>{{ result.input_data_id }}</td>
+                    <td>{{ input.r }}</td>
+                    <td>{{ input.g }}</td>
+                    <td>{{ input.b }}</td>
+                    <td>{{ input.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        {% if input.file_path %}
+                        <a href="{{ url_for('download_result', filename=input.file_path) }}" target="_blank">
+                            {{ input.file_path }}
+                        </a>
+                        {% else %}
+                        Manual Input
+                        {% endif %}
+                    </td>
+                    <td>{{ models_names[result.model_name] or result.model_name }}</td>
+                    <td>{{ result.predicted_class }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination untuk Tabel Input -->
+        <ul class="pagination">
+            {% for p in input_pagination.iter_pages() %}
+            {% if p %}
+                {% if p == input_pagination.page %}
+                <li class="active"><span>{{ p }}</span></li>
+                {% else %}
+                <li>
+                    <a href="{{ url_for('history', input_page=p, result_file_page=request.args.get('result_file_page', 1)) }}">
+                        {{ p }}
+                    </a>
+                </li>
+                {% endif %}
+            {% else %}
+            <li><span>...</span></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <p class="text-muted text-center">Belum ada riwayat klasifikasi.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Download File Hasil -->
+<div class="card mt-5">
+    <div class="card-header">Download File Hasil Klasifikasi</div>
+    <div class="card-body">
+        {% if result_files %}
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>                    
+                    <th>Nama File</th>
+                    <th>Tanggal Dibuat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in result_files %}
+                <tr>
+                    <td>{{ loop.index + (result_file_pagination.page - 1) * result_file_pagination.per_page }}</td>
+                    <td>{{ file.input_file_id }}</td>
+                    <td>{{ file.filename }}</td>
+                    <td>{{ file.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        <a href="{{ url_for('download_result', filename=file.filename) }}" class="btn btn-secondary btn-sm" download>
+                            Unduh
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination untuk File Hasil -->
+        <ul class="pagination">
+            {% for p in result_file_pagination.iter_pages() %}
+            {% if p %}
+                {% if p == result_file_pagination.page %}
+                <li class="active"><span>{{ p }}</span></li>
+                {% else %}
+                <li>
+                    <a href="{{ url_for('history', result_file_page=p, input_page=request.args.get('input_page', 1)) }}">
+                        {{ p }}
+                    </a>
+                </li>
+                {% endif %}
+            {% else %}
+            <li><span>...</span></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <p class="text-muted">Belum ada file hasil klasifikasi tersedia.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

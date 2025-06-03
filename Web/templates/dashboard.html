@@ -4,23 +4,33 @@
     <!-- Container Pilihan Model -->
     <div class="model-options">
         <h1 class="header-model">Pelajari Model</h1>
-        <ul class="model-list">
-            <li><a href="#" class="model-choice">Artificial Neural Network</a></li>
-            <li><a href="#" class="model-choice">AdaBoost Decision Tree</a></li>
-            <li><a href="#" class="model-choice">AdaBoost SVM RBF</a></li>
+        <ul class="model-list" id="modelList">
+            <li><button type="button" data-model="ann" class="model-choice">Artificial Neural Network</button></li>
+            <li><button type="button" data-model="adaboost_dt" class="model-choice">AdaBoost Decision Tree</button></li>
+            <li><button type="button" data-model="adaboost_svm" class="model-choice">AdaBoost SVM RBF</button></li>
+            <li><button type="button" data-model="bagging_svm" class="model-choice">Bagging SVM RBF</button></li>
         </ul>
     </div>
-
     <!-- Container Slideshow -->
     <div class="slideshow-container">
-        <h1 class="header-slide">Tentang Model</h1>
-        <div class="image-box">
-            <img src="placeholder.png" alt="Performance Image" />
+        <h1 class="header-slide" id="slideTitle">Tentang Model</h1>
+        <div class="image-box" id="slideshow">
+            <!-- Gambar akan ditambahkan oleh JS -->
         </div>
         <div class="nav-buttons">
-            <button class="nav-left">&lt;</button>
-            <button class="nav-right">&gt;</button>
+            <button class="nav-left" onclick="prevSlide()"><</button>
+            <button class="nav-right" onclick="nextSlide()">></button>
         </div>
     </div>
 </div>
+<!-- Inject data model dari backend ke JS -->
+<script type="text/javascript">
+    const modelSlidesRaw = '{{ models | tojson | safe }}';
+    const modelSlidesFromTemplate = JSON.parse(modelSlidesRaw.replace(/&quot;/g, '"'));
+</script>
+
+<!-- Jalankan inisialisasi setelah script dimuat -->
+<script>
+    window.onload = () => initSlideshow(modelSlidesFromTemplate);
+</script>
 {% endblock %}

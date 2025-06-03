@@ -1,7 +1,9 @@
 import numpy as np
 import pandas as pd
-import cv2
 
+# Fungsi untuk membuat DataFrame dari input RGB tunggal
+def create_single_df(r, g, b):
+    return pd.DataFrame({"R": [r], "G": [g], "B": [b]})
 
 def normalize_rgb(df):
     df_norm = df.copy()
@@ -10,13 +12,11 @@ def normalize_rgb(df):
     df_norm['b'] = df_norm['B'] / 255
     return df_norm
 
-
 def calculate_ratios(df):
     df_rasio = df.copy()
     df_rasio['R_G_ratio'] = df_rasio['R'] / df_rasio['G']
     df_rasio['G_B_ratio'] = df_rasio['G'] / df_rasio['B']
     return df_rasio
-
 
 def rgb_to_hsv(df):
     df_hsv = df.copy()
@@ -45,7 +45,6 @@ def rgb_to_hsv(df):
     df_hsv['S'] = s
     df_hsv['V'] = v
     return df_hsv
-
 
 def rgb_to_lab(df):
     df_lab = df.copy()
@@ -77,8 +76,3 @@ def rgb_to_lab(df):
     df_lab['ca'] = a
     df_lab['cb'] = b_val
     return df_lab
-
-
-# Fungsi untuk membuat DataFrame dari input RGB tunggal
-def create_single_df(r, g, b):
-    return pd.DataFrame({"R": [r], "G": [g], "B": [b]})

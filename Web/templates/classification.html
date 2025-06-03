@@ -1,68 +1,114 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-classification mt-4">
-    <h1 class="header-classification">Klasifikasi</h1>
-    <div class="row">
-        <!-- Pilihan Model -->
-        <div class="col-md-4">
+<h1 class="header-classification">Perbandingan Model Klasifikasi</h1>
+
+<!-- Form Utama untuk Semua Input -->
+<form id="classification-form" method="POST" enctype="multipart/form-data" action="/classification">
+    <input type="hidden" name="selected_model" id="selected-model-input" />
+
+    <!-- Bagian Input Data dan Pemilihan Model -->
+    <div class="row mb-4">
+        <!-- Kolom Kanan: Input Data dan Hasil Klasifikasi -->
+        <div class="right-panel col-md-9">
+            <!-- Tombol Toggle Input Mode -->
+                <div class="mb-3">
+                    <button type="button" id="input-mode-btn" class="btn-secondary">Input Manual</button>
+                </div>
+
+                <!-- Input Manual RGB -->
+                <div id="rgb-input" class="card mb-3" style="display: none;">
+                    <div class="card-header">Masukkan Nilai RGB</div>
+                    <div class="card-body">
+                        <input type="number" name="r" id="r" placeholder="R (0-255)" min="0" max="255" step="0.01" class="form-control me-2">
+                        <input type="number" name="g" id="g" placeholder="G (0-255)" min="0" max="255" step="0.01" class="form-control me-2">
+                        <input type="number" name="b" id="b" placeholder="B (0-255)" min="0" max="255" step="0.01" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Upload CSV -->
+                <div id="file-upload-container" class="card mb-3">
+                    <div class="card-header">Unggah File CSV/Excel</div>
+                    <div class="card-body">
+                        <label for="file-upload" class="btn btn-outline-secondary">Pilih File</label>
+                        <input type="file" name="csv_file" id="file-upload" accept=".csv,.xls,.xlsx" hidden>
+                        <span id="file-name" class="ms-2 text-muted"></span>
+                    </div>
+                </div>
+
+            <!-- Tombol Submit -->
+            <button type="submit" id="run-model" class="btn">Jalankan Model</button>
+        </div>
+
+        <!-- Kolom Kiri: Pemilihan Model -->
+        <div class="left-panel col-md-3">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
                     <h5>Pilih Model</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/classification">
-                        <div class="model-selection mb-3">
-                            {% for key, value in models %}
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="selected_model" value="{{ key }}" id="model_{{ key }}">
-                                    <label class="form-check-label" for="model_{{ key }}">
-                                        {{ value }}
-                                    </label>
-                                </div>
-                            {% endfor %}
-                        </div>
-
-                        <!-- Masukan Data -->
-                        <div class="card mt-3 border-light shadow-sm">
-                            <div class="card-header bg-light">
-                                <h5>Masukan Data</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-2">
-                                    <input type="number" name="r" placeholder="R (0-255)" class="form-control" min="0" max="255" required>
-                                    <input type="number" name="g" placeholder="G (0-255)" class="form-control" min="0" max="255" required>
-                                    <input type="number" name="b" placeholder="B (0-255)" class="form-control" min="0" max="255" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100 mt-3">Jalankan Model</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hasil Klasifikasi -->
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white">
-                    <h5>Hasil Klasifikasi</h5>
-                </div>
-                <div class="card-body">
-                    <div class="results-box">
-                        {% if classification_results %}
-                            <ul class="list-group list-group-flush">
-                                {% for result in classification_results %}
-                                    <li class="list-group-item">{{ result }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p class="text-muted">Tidak ada hasil klasifikasi. Silakan pilih model dan masukkan nilai RGB.</p>
-                        {% endif %}
+                    <div class="model-buttons mb-3" id="model-buttons">
+                        {% for key, value in models %}
+                            <button type="button" class="model-btn btn btn-outline-secondary w-100 mb-2" data-model="{{ key }}">
+                                {{ value }}
+                            </button>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- Hasil Klasifikasi -->
+<div class="classification-results">
+    <h1 class="header-classification">Hasil Klasifikasi Tiap Model</h1>
+    <div class="row">
+        {% if classification_results %}
+            {% for model_key, predicted_class in classification_results.items() %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5>{{ models_names[model_key] or model_key }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <strong>{{ predicted_class }}</strong>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% elif summary and summary|length > 0 %}
+        {% else %}
+            <!-- Jika tidak ada hasil klasifikasi maupun ringkasan -->
+            <p class="text-muted">Silakan pilih model dan masukkan nilai RGB atau unggah file CSV.</p>
+        {% endif %}
+    </div>
 </div>
+
+<!-- Ringkasan Jika Ada File CSV -->
+{% if summary and summary|length > 0 %}
+    <h3>Ringkasan Hasil (CSV)</h3>
+        <a href="{{ download_link }}" class="model-btn">Download Hasil Klasifikasi (Excel)</a>
+    <div class="row">
+        {% for model_name, class_counts in summary.items() %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{{ models_names[model_name] or model_name }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for class_key, count in class_counts.items() %}
+                                <li class="list-group-item">
+                                    {{ class_labels[class_key] if class_key in class_labels else 'Kelas Tidak Diketahui' }}:
+                                    <strong>{{ count }}</strong> kali
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+</form>
 {% endblock %}

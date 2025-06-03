@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="header-classification">Deteksi Dosis Penyemprotan Silika Sekam Padi</h1>
+
+<!-- Form untuk Input Manual atau Upload File -->
+<form id="classification-form" method="POST" enctype="multipart/form-data" action="/classification_bagging">
+
+    <!-- Hidden input untuk model yang dipilih -->
+    <input type="hidden" name="selected_model" id="selected-model-input" value="bagging_svm" />
+
+    <!-- Tombol Toggle Input Mode -->
+    <div class="mb-3">
+        <button type="button" id="input-mode-btn" class="btn-secondary">Input Manual</button>
+    </div>
+
+    <!-- Input Manual RGB -->
+    <div id="rgb-input" class="card mb-3" style="display: none;">
+        <div class="card-header">Masukkan Nilai RGB</div>
+        <div class="card-body">
+            <input type="number" name="r" id="r" placeholder="R (0-255)" min="0" max="255" step="0.01" class="form-control me-2">
+            <input type="number" name="g" id="g" placeholder="G (0-255)" min="0" max="255" step="0.01" class="form-control me-2">
+            <input type="number" name="b" id="b" placeholder="B (0-255)" min="0" max="255" step="0.01" class="form-control">
+        </div>
+    </div>
+
+    <!-- Upload CSV -->
+    <div id="file-upload-container" class="card mb-3">
+        <div class="card-header">Unggah File CSV/Excel</div>
+        <div class="card-body">
+            <label for="file-upload" class="btn btn-outline-secondary">Pilih File</label>
+            <input type="file" name="csv_file" id="file-upload" accept=".csv,.xls,.xlsx" hidden>
+            <span id="file-name" class="ms-2 text-muted"></span>
+        </div>
+    </div>
+
+    <!-- Tombol Submit -->
+    <button type="submit" id="run-model" class="btn-primary w-100 mt-3">Klasifikasi</button>
+</form>
+
+<!-- Hasil Klasifikasi -->
+{% if classification_result %}
+    <div class="results-box">
+        {{ classification_result | safe }}
+    </div>
+{% endif %}
+
+<!-- Ringkasan Jika Ada File CSV -->
+{% if summary and summary|length > 0 %}
+    <hr>
+    <h3>Ringkasan Hasil (CSV)</h3>
+    <div class="alert mt-3">
+        <a href="{{ download_link }}" download class="btn-download">Download Hasil Klasifikasi (Excel)</a>
+    </div>
+    {% for model_name, class_counts in summary.items() %}
+        <div class="card mt-3">
+            <div class="card-header">{{ models_names[model_name] or model_name }}</div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for class_label, count in class_counts.items() %}
+                        <li class="list-group-item">
+                            {{ CLASS_LABELS[class_label] or 'Kelas ' ~ class_label }}:
+                            <strong>{{ count }}</strong> kali
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
